@@ -31,7 +31,7 @@ initializeDBAndServer();
 app.post("/register",async (request, response) => {
 let { username, name, password, gender, location } = request.body;
 
-let hashedPassword =await bcrypt.hash(password, 10);
+let hashedPassword = await bcrypt.hash(password, 10);
 let dataBaseUser = `
         SELECT *
         FROM user
@@ -52,16 +52,16 @@ if (userData === undefined) {
     if (password.length < 5) {
         response.status(400);
         response.send("Password is too short");
-        }
+    }
     else {
-    await db.run(postNewUserQuery);
+        await dataBase.run(postNewUserQuery);
         response.send("User created successfully");
-        }
-  }
-  else {
+    }
+}
+else {
     response.status(400);
     response.send("User already exists");
-  }
+}
 });
 
 app.post("/login", async (request, response) => {
